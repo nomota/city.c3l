@@ -1,7 +1,7 @@
 {
   "provides": "cityhash",
   "version": "1.0.0",
-  "authors": ["CityHash C3 Port"],
+  "authors": ["Nomota Hiongun KIM"],
   "langrev": "1",
   "warnings": ["no-unused"],
   "targets": {
