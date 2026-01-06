@@ -55,7 +55,7 @@ cityhash-c3/
 Users add this to their project using:
 
 ```bash
-$ c3c vendor fetch cityhash --url <git-url>
+$ c3c vendor fetch cityhash --url https://github.com/nomota/cityhash-c3.git
 ```
 
 Then import and use:
@@ -70,7 +70,7 @@ ulong hash = cityhash::CityHash64(data, len);
 Copy files to project and compile together:
 
 ```bash
-c3c compile cityhash.c3 myapp.c3 -o myapp
+$ c3c compile cityhash.c3 myapp.c3 -o myapp
 ```
 
 ### As a Static Library
@@ -78,8 +78,8 @@ c3c compile cityhash.c3 myapp.c3 -o myapp
 Build and link separately:
 
 ```bash
-./build.sh lib
-c3c compile myapp.c3 -l cityhash -L .
+$ ./build.sh lib
+$ c3c compile myapp.c3 -l cityhash -L .
 ```
 
 ## Vendor System Integration
@@ -138,14 +138,14 @@ module cityhashcrc (optional, requires SSE4.2)
 ### Publishing
 
 ```bash
-git tag v1.0.0
-git push origin v1.0.0
+$ git tag v1.0.0
+$ git push origin v1.0.0
 ```
 
 Users can then fetch with:
 
 ```bash
-c3c vendor fetch cityhash --url <your-repo-url> --tag v1.0.0
+$ c3c vendor fetch cityhash --url https://github.com/nomota/cityhash-c3.git --tag v1.0.0
 ```
 
 ## Customization
@@ -179,24 +179,24 @@ $endif
 ```bash
 # Make changes to cityhash.c3
 # Test immediately
-./build.sh test
-./cityhash_test
+$ ./build.sh test
+$ ./cityhash_test
 
 # Try examples
-./build.sh example
-./cityhash_example
+$ ./build.sh example
+$ ./cityhash_example
 ```
 
 ### Testing as Vendor Library
 
 ```bash
 # Build example project
-./build.sh vendor-example
+$ ./build.sh vendor-example
 
 # Or manually
-cd examples/simple
-c3c build
-./build/simple_example
+$ cd examples/simple
+$ c3c build
+$ ./build/simple_example
 ```
 
 ### Release Process
