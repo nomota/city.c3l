@@ -22,7 +22,7 @@ c3c vendor fetch cityhash --url https://github.com/nomota/cityhash-c3.git
 {
   "dependencies": {
     "cityhash": {
-      "git": "https://github.com/YOUR_USERNAME/cityhash-c3.git",
+      "git": "https://github.com/nomota/cityhash-c3.git",
       "tag": "v1.0.0"
     }
   }
@@ -33,8 +33,8 @@ c3c vendor fetch cityhash --url https://github.com/nomota/cityhash-c3.git
 
 1. Copy the library files to your project:
 ```bash
-mkdir -p vendor/cityhash
-cp cityhash.c3 cityhash.c3i manifest.json vendor/cityhash/
+$ mkdir -p vendor/cityhash
+$ cp cityhash.c3 cityhash.c3i manifest.json vendor/cityhash/
 ```
 
 2. Add to your `project.json`:
@@ -83,22 +83,22 @@ The C3 implementation includes several modernizations:
 
 ### CityHash64
 ```c3
-fn ulong CityHash64(char* buf, usz len)
-fn ulong CityHash64WithSeed(char* buf, usz len, ulong seed)
-fn ulong CityHash64WithSeeds(char* buf, usz len, ulong seed0, ulong seed1)
+fn ulong cityhash::CityHash64(char* buf, usz len);
+fn ulong cityhash::CityHash64WithSeed(char* buf, usz len, ulong seed);
+fn ulong cityhash::CityHash64WithSeeds(char* buf, usz len, ulong seed0, ulong seed1);
 ```
 
 ### CityHash128
 ```c3
-fn uint128 CityHash128(char* s, usz len)
-fn uint128 CityHash128WithSeed(char* s, usz len, uint128 seed)
+fn uint128 cityhash::CityHash128(char* s, usz len);
+fn uint128 cityhash::CityHash128WithSeed(char* s, usz len, uint128 seed);
 ```
 
 ### CityHashCrc (requires SSE4.2)
 ```c3
-fn uint128 CityHashCrc128(char* s, usz len)
-fn uint128 CityHashCrc128WithSeed(char* s, usz len, uint128 seed)
-fn void CityHashCrc256(char* s, usz len, ulong* result)
+fn uint128 city::CityHashCrc128(char* s, usz len);
+fn uint128 cityhash::CityHashCrc128WithSeed(char* s, usz len, uint128 seed);
+fn void cityhash::CityHashCrc256(char* s, usz len, ulong* result);
 ```
 
 ## Usage Example
@@ -127,17 +127,17 @@ fn void main()
 
 ### Basic Build (without SSE4.2)
 ```bash
-c3c compile cityhash.c3 example.c3 -o cityhash_example
+$ c3c compile cityhash.c3 example.c3 -o cityhash_example
 ```
 
 ### Build with SSE4.2 Support
 ```bash
-c3c compile cityhash.c3 cityhashcrc.c3 example.c3 -o cityhash_example --target x86_64 --feature sse4.2
+$ c3c compile cityhash.c3 cityhashcrc.c3 example.c3 -o cityhash_example --target x86_64 --feature sse4.2
 ```
 
 ### Using as a Library
 ```bash
-c3c compile cityhash.c3 --lib
+$ c3c compile cityhash.c3 --lib
 ```
 
 ## Project Structure
@@ -214,7 +214,7 @@ THE SOFTWARE.
 
 - **Original Authors**: Geoff Pike and Jyrki Alakuijala (Google)
 - **C Port**: Alexander Nusov
-- **C3 Port**: [Your contribution]
+- **C3 Port**: Nomota Hiongun Kim (hiongun@gmail.com)
 
 ## References
 
