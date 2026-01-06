@@ -16,9 +16,9 @@ examples/simple/
 ### From the example directory:
 
 ```bash
-cd examples/simple
-c3c build
-./build/simple_example
+$ cd examples/simple
+$ c3c build
+$ ./build/simple_example
 ```
 
 ### Expected Output:
@@ -78,7 +78,7 @@ To use this in your own project:
 2. Or use a Git URL if published:
    ```json
    "cityhash": {
-     "git": "https://github.com/YOUR_USERNAME/cityhash-c3.git"
+     "git": "https://github.com/nomota/cityhash-c3.git"
    }
    ```
 
