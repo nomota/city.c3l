@@ -10,7 +10,7 @@
 //
 // Functions in the CityHash family are not suitable for cryptography.
 
-module cityhashcrc;
+module cityhash;
 
 import cityhash;
 import std::io;
@@ -165,43 +165,6 @@ fn uint128 city_hash_crc128(char* s, usz len)
     }
 }
 
-// Public API functions with C-compatible names
-fn uint128 CityHashCrc128(char* s, usz len) @export
-{
-    return city_hash_crc128(s, len);
-}
-
-fn uint128 CityHashCrc128WithSeed(char* s, usz len, uint128 seed) @export
-{
-    return city_hash_crc128_with_seed(s, len, seed);
-}
-
-fn void CityHashCrc256(char* s, usz len, ulong* result) @export
-{
-    city_hash_crc256(s, len, result);
-}
-
 $else
-// Fallback for non-SSE4.2 platforms
-fn uint128 CityHashCrc128(char* s, usz len) @export
-{
-    io::printfn("Warning: CityHashCrc128 requires SSE4.2 support. Falling back to CityHash128.");
-    return cityhash::city_hash128(s, len);
-}
 
-fn uint128 CityHashCrc128WithSeed(char* s, usz len, uint128 seed) @export
-{
-    io::printfn("Warning: CityHashCrc128WithSeed requires SSE4.2 support. Falling back to CityHash128WithSeed.");
-    return cityhash::city_hash128_with_seed(s, len, seed);
-}
-
-fn void CityHashCrc256(char* s, usz len, ulong* result) @export
-{
-    io::printfn("Error: CityHashCrc256 requires SSE4.2 support and is not available on this platform.");
-    // Set all results to 0
-    result[0] = 0;
-    result[1] = 0;
-    result[2] = 0;
-    result[3] = 0;
-}
 $endif

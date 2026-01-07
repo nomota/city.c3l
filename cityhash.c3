@@ -28,7 +28,7 @@ module cityhash;
 import std::io;
 
 // Type definitions
-def Uint128 = uint128;
+typedef Uint128 = uint128;
 
 // Constants - some primes between 2^63 and 2^64 for various uses
 const ulong K0 = 0xc3a5c85c97cb3127;
@@ -406,28 +406,3 @@ fn uint128 city_hash128(char* s, usz len)
     }
 }
 
-// Public API functions with C-compatible names
-fn ulong CityHash64(char* buf, usz len) @export
-{
-    return city_hash64(buf, len);
-}
-
-fn ulong CityHash64WithSeed(char* buf, usz len, ulong seed) @export
-{
-    return city_hash64_with_seed(buf, len, seed);
-}
-
-fn ulong CityHash64WithSeeds(char* buf, usz len, ulong seed0, ulong seed1) @export
-{
-    return city_hash64_with_seeds(buf, len, seed0, seed1);
-}
-
-fn uint128 CityHash128(char* s, usz len) @export
-{
-    return city_hash128(s, len);
-}
-
-fn uint128 CityHash128WithSeed(char* s, usz len, uint128 seed) @export
-{
-    return city_hash128_with_seed(s, len, seed);
-}
