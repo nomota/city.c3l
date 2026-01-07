@@ -30,6 +30,7 @@ import std::io;
 // Type definitions
 typedef Uint128 = uint128;
 
+
 // Constants - some primes between 2^63 and 2^64 for various uses
 const ulong K0 = 0xc3a5c85c97cb3127;
 const ulong K1 = 0xb492b66fbe98f273;
