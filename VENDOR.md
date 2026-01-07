@@ -194,33 +194,6 @@ Compile with SSE4.2:
 $ c3c build --target x86_64 --feature sse4.2
 ```
 
-### Using as a Hash Table Key Function
-
-```c3
-module myapp;
-
-import cityhash;
-import std::collections::map;
-
-struct MyKey
-{
-    String data;
-}
-
-fn ulong hash_my_key(MyKey* key) @inline
-{
-    return cityhash::CityHash64(key.data.ptr, key.data.len);
-}
-
-fn bool keys_equal(MyKey* a, MyKey* b) @inline
-{
-    return a.data.equals(b.data);
-}
-
-// Use with HashMap
-// HashMap(<MyKey, MyValue>, hash_my_key, keys_equal) map;
-```
-
 ## Vendor Commands
 
 ### Update Library
