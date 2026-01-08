@@ -51,7 +51,7 @@ The C3 implementation includes several modernizations:
 
 1. **Module System**: Uses C3's module system instead of header files
 2. **Type Safety**: Better type checking with C3's type system
-3. **Conditional Compilation**: Uses C3's compile-time conditionals (`$if`)
+3. **Conditional Compilation**: Uses C3's compile-time conditionals (`@if`)
 4. **Improved Macros**: Uses C3's macro system instead of C preprocessor
 5. **Native uint128**: Uses C3's built-in `uint128` type
 6. **Better Error Handling**: Cleaner error handling for unsupported features
