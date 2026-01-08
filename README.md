@@ -35,7 +35,7 @@ import city;
 
 - **city::hash64**: Fast 64-bit hash function
 - **city::hash128**: 128-bit hash function, optimized for strings > 2000 bytes
-- **city::hash64_crc**: Variants using SSE4.2 CRC32 instructions (requires SSE4.2 support)
+- **city::hash128_crc**: Variants using SSE4.2 CRC32 instructions (requires SSE4.2 support)
 
 ## Files
 
@@ -74,14 +74,14 @@ fn uint128 city::hash128_with_seed(char* s, usz len, uint128 seed);
 ### CityHashCrc (requires SSE4.2)
 ```c3
 fn uint128 city::hash128_crc(char* s, usz len);
-fn uint128 city::hash128_crcWithSeed(char* s, usz len, uint128 seed);
-fn void cityhashcrc::CityHashCrc256(char* s, usz len, ulong* result);
+fn uint128 city::hash128_crc_with_seed(char* s, usz len, uint128 seed);
+fn void city::hash256_crc(char* s, usz len, ulong* result);
 ```
 
 ## Usage Example
 
 ```c3
-import cityhash;
+import city;
 import std::io;
 
 fn void main()
@@ -89,14 +89,14 @@ fn void main()
     String text = "Hello, World!";
     
     // 64-bit hash
-    ulong hash64 = cityhash::CityHash64(text.ptr, text.len);
-    io::printfn("Hash64: 0x%016llx", hash64);
+    ulong hash64 = city::hash64(text.ptr, text.len);
+    io::printfn("Hash64: 0x%016x", hash64);
     
     // 128-bit hash
-    uint128 hash128 = cityhash::CityHash128(text.ptr, text.len);
-    ulong low = cityhash::uint128_low64!(hash128);
-    ulong high = cityhash::uint128_high64!(hash128);
-    io::printfn("Hash128: 0x%016llx%016llx", high, low);
+    uint128 hash128 = city::hash128(text.ptr, text.len);
+    ulong low = city::uint128_low64(hash128);
+    ulong high = city::uint128_high64(hash128);
+    io::printfn("Hash128: 0x%016llx%016x", high, low);
 }
 ```
 
@@ -104,27 +104,22 @@ fn void main()
 
 ### Basic Build (without SSE4.2)
 ```bash
-$ c3c compile cityhash.c3 example.c3 -o cityhash_example
+$ c3c compile city.c3 example.c3
 ```
 
 ### Build with SSE4.2 Support
 ```bash
-$ c3c compile cityhash.c3 cityhashcrc.c3 example.c3 -o cityhash_example --target x86_64 --feature sse4.2
-```
-
-### Using as a Library
-```bash
-$ c3c compile cityhash.c3 --lib
+$ c3c compile city.c3 citycrc.c3 example.c3 --target x86_64 --feature sse4.2
 ```
 
 ## Project Structure
 
 ```
 .
-├── cityhash.c3       # Main hash functions
-├── cityhashcrc.c3    # SSE4.2 optimized variants
+├── city.c3           # Main hash functions
+├── citycrc.c3        # SSE4.2 optimized variants
 ├── example.c3        # Usage examples
-├── project.json      # C3 project file
+├── manifest.json     # C3 project file
 └── README.md         # This file
 ```
 
@@ -168,24 +163,6 @@ MIT License (same as original CityHash)
 Copyright (c) 2011 Google, Inc.  
 Copyright (c) 2011-2012 Alexander Nusov (C port)  
 Copyright (c) 2025 (C3 port)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
 
 ## Credits
 
