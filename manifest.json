@@ -1,10 +1,11 @@
-{
-  "provides": "cityhash",
-  "targets": {
-    "cityhash": {
-      "version": "1.0.0",
-      "languages": ["c3"]
-    }
-  },
-  "dependencies": {}
+{ 
+  "provides" : "city",
+  "sources": ["src/city.c3", "src/cityhash.c3"],
+  "targets" : {
+    "macos-x64" : {},
+    "macos-aarch64" : {},
+    "linux-x64" : {},
+    "windows-x64" : {}
+  }
 }
+
