@@ -1,6 +1,6 @@
 { 
   "provides" : "city",
-  "sources": ["src/city.c3", "src/cityhash.c3"],
+  "sources": ["src/city.c3", "src/citycrc.c3"],
   "targets" : {
     "macos-x64" : {},
     "macos-aarch64" : {},
