@@ -15,6 +15,20 @@ module city;
 import std::io;
 import libc;
 
+
+fn ulong _mm_crc32_u64(ulong crc, ulong val) 
+  @if($defined(env::SSE4_2)) @inline
+{
+  ulong result;
+  asm {
+    movq $rax, crc;        // move crc value to rax register
+    crc32 $rax, val;       // run CRC32 command: rax = crc32(rax, val)
+    movq result, $rax;     // store to result 
+  }
+  return result;
+}
+
+/*
 fn ulong _mm_crc32_u64(ulong crc, ulong val) 
   @if($defined(env::SSE4_2)) @inline
 {
@@ -29,6 +43,7 @@ fn ulong _mm_crc32_u64(ulong crc, ulong val)
   }
   return 0;
 }
+*/
 
 fn ulong _mm_crc32_u64(ulong crc, ulong data)
   @if(! $defined(env::SSE4_2)) @inline
