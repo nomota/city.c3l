@@ -23,7 +23,7 @@ $ sudo make install
 # At your C3 project dir (initiated by "c3c init")
 $ c3l fetch https://github.com/nomota/city.c3l
 # This command downloads CityHash library into ./lib dir as a zip compressed file
-# This command adds dependancy in your project.json
+# This command adds dependancy in your project.json / "dependencies": [ "city" ]
 ```
 
 ### Import in your code:
