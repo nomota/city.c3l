@@ -23,7 +23,7 @@ $ sudo make install
 # At your C3 project dir (initiated by "c3c init")
 $ c3l fetch https://github.com/nomota/city.c3l
 # This command downloads CityHash library into ./lib dir as a zip compressed file
-# This command adds dependancy in project.json
+# This command adds dependancy in your project.json
 ```
 
 ### Import in your code:
@@ -39,11 +39,12 @@ import city;
 
 ## Files
 
-- `city.c3` - Main CityHash implementation (64-bit and 128-bit variants)
-- `citycrc.c3` - CRC-based variants requiring SSE4.2 (optional)
-- `example.c3` - Example usage and test cases
+- `src/city.c3` - Main CityHash implementation (64-bit and 128-bit variants)
+- `src/citycrc.c3` - CRC-based variants requiring SSE4.2 (optional)
+- `src/example.c3` - Example usage and test cases
+- `test/test.c3` - Test code
 - `project.json` - C3 project configuration
--`manifest.json`
+-`manifest.json` - Library configuration
 
 ## Key Differences from C
 
@@ -98,29 +99,6 @@ fn void main()
     ulong high = city::uint128_high64(hash128);
     io::printfn("Hash128: 0x%016llx%016x", high, low);
 }
-```
-
-## Building
-
-### Basic Build (without SSE4.2)
-```bash
-$ c3c compile city.c3 example.c3
-```
-
-### Build with SSE4.2 Support
-```bash
-$ c3c compile city.c3 citycrc.c3 example.c3 --target x86_64 --feature sse4.2
-```
-
-## Project Structure
-
-```
-.
-├── city.c3           # Main hash functions
-├── citycrc.c3        # SSE4.2 optimized variants
-├── example.c3        # Usage examples
-├── manifest.json     # C3 project file
-└── README.md         # This file
 ```
 
 ## Performance Characteristics
