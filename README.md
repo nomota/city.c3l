@@ -44,7 +44,7 @@ import city;
 - `src/example.c3` - Example usage and test cases
 - `test/test.c3` - Test code
 - `project.json` - C3 project configuration
--`manifest.json` - Library configuration
+- `manifest.json` - Library configuration
 
 ## Key Differences from C
 
